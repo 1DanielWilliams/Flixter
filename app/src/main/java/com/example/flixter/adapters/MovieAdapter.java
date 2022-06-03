@@ -102,11 +102,10 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
                 imageUrl = movie.getPosterPath();
             }
             Glide.with(context).load(imageUrl)
-                    .transform(new CenterCrop(), new RoundedCorners(25))
-                    .override(440, 740)
                     .placeholder(R.drawable.flicks_movie_placeholder)
                     .error(R.drawable.flicks_movie_placeholder)
                     .into(ivPoster);
+
         }
     }
 }
