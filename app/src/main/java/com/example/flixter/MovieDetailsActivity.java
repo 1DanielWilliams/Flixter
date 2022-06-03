@@ -11,6 +11,8 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.example.flixter.models.Movie;
 
 import org.parceler.Parcels;
@@ -25,6 +27,8 @@ public class MovieDetailsActivity extends AppCompatActivity {
     TextView tvTitleDetails;
     TextView tvOverviewDetails;
     RatingBar rbVoteAverage;
+    ImageView ivPosterDetails;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +38,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
         tvTitleDetails = findViewById(R.id.tvTitleDetails);
         tvOverviewDetails = findViewById(R.id.tvOverviewDetails);
         rbVoteAverage = findViewById(R.id.rbVoteAverage);
+        ivPosterDetails = findViewById(R.id.ivPosterDetails);
 
         // unwrap the movie passed in via intent, using its simple name as a key
         movie = (Movie) Parcels.unwrap(getIntent().getParcelableExtra(Movie.class.getSimpleName()));
@@ -47,5 +52,9 @@ public class MovieDetailsActivity extends AppCompatActivity {
 
         rbVoteAverage.setRating(voteAverage / 2.0f);
 
+        Glide.with(this).load(movie.getBackdropPath())
+                .placeholder(R.drawable.flicks_movie_placeholder)
+                .error(R.drawable.flicks_movie_placeholder)
+                .into(ivPosterDetails);
     }
 }
